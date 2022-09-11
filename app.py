@@ -1,21 +1,35 @@
 from flask import Flask, render_template, request, redirect, url_for
 import graphing
 import fetch_data
+import price
+import password_testing
 
 '''https://pythonbasics.org/flask-login/'''
 
 app = Flask(__name__)
 
+logged_in_flag = False
 @app.route('/login', methods=['GET', 'POST'])
-def hello_world():  # put application's code here
+def login_and_register():  # put application's code here
     user_already_created = False
     if request.method == "POST":
-        new_user_file = f"static/{request.form.get('username')}.txt"
-        try:
-            create_file = open(new_user_file, "x")
-        except:
-            user_already_created = True
-        return render_template('launch_page.html', user_already_created=user_already_created)
+        if request.form.get("user_function") == "Login":
+            password = request.form.get("password")
+            username = request.form.get("username")
+            if password_testing.login_attempt(username, password) == True:
+                logged_in_flag = True
+                return redirect(url_for("recipe_query"))
+            else:
+                logged_in_flag = False
+                return render_template('launch_page.html', failed_login=True)
+        elif request.form.get("user_function") == "Register":
+            new_user_file = f"static/{request.form.get('username')}.txt"
+            try:
+                create_file = open(new_user_file, "x")
+                return redirect(url_for("recipe_query"))
+            except:
+                user_already_created = True
+                return render_template('launch_page.html', user_already_created=user_already_created)
     return render_template('launch_page.html')
 
 @app.route('/', methods=['GET','POST'])

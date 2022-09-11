@@ -1,0 +1,107 @@
+body {
+    background-image: url('https://media.istockphoto.com/photos/high-angle-image-of-a-rustic-wooden-food-table-picture-id1029498170?k=20&m=1029498170&s=170667a&w=0&h=Cz-m0hstFYqfi9viXb3whv5QCxdA0IgoGbfVThRr5ms=');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.navbar-right {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.query_box {
+    border: 2px solid;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    background-color: #d8dce8;
+    padding: 15px;
+    min-height: 50%;
+    width: 60%;
+}
+
+.card {
+    margin: 10px;
+    padding-top: 15px;
+    padding-bottom: 2px;
+}
+
+.card-image-top {
+    border: 2px solid green;
+    border-radius: 5px;
+}
+
+.base-background {
+    position: relative;
+    border: 2px solid;
+    border-radius: 10px;
+    background-color: #faf3dc;
+    min-height: 100%;
+    overflow: auto;
+    padding: 20px;
+    border-top: 0px;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.base-title {
+    text-align: center;
+    border: 2px solid;
+    margin: 0;
+    padding: 20px;
+    background-color: #faf3dc;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.right-container {
+    margin-top: 20px;
+    float: right;
+    width: 50%;
+}
+
+.left-container {
+    margin-top: 35px;
+    float: left;
+    width: 50%;
+}
+
+.centred-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.centred-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 32%;
+}
+
+.left-button {
+    display: block;
+    float:left;
+    width: 32%
+}
+
+.right-button {
+    display: block;
+    float:right;
+    width: 32%
+}
+
+.recipe-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #539962;
+    border-radius: 5px;
+    width: 80%;"
+}
