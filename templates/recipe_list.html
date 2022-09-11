@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        {% for i in range(0, recipe_labels|length) %}   <!-- |length finds the length of list recipe_labels in jinja -->
+            <div class="row">
+            {% for j in range(0, recipe_labels[i]|length) %}
+                <div class="card col-sm" style="width: 18rem;">
+                    <img class="card-image-top" src={{ recipe_thumbnails[i][j] }} alt="card-image-top"><br>
+                    <h5>{{ recipe_labels[i][j] }}</h5>
+                    <a href="/recipe_info?id={{ recipe_ids[i][j] }}" type="submit" class="stretched-link" value='Next Page'></a>
+                </div>
+            {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <!-- {{ recipe_list['hits'][0] }} -->
+{% endblock %}

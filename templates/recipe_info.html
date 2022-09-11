@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3 class="base-title">{{ specific_recipe_data['recipe']['label'] }}</h3>
+    <div class="base-background">
+        <div class="left-container">
+            <img class="recipe-image" src={{ organised_recipe_data['image'] }} alt="recipe_image">
+            <br><br>
+            <div class="centred-container">
+                <div class="left-button">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-health" aria-expanded="false" aria-controls="collapse-health">
+                        Health Labels <i class="bi bi-caret-down-fill"></i>
+                    </button>
+                </div>
+                <div class="centred-button">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-diet" aria-expanded="false" aria-controls="collapse-diet">
+                        Diet Labels <i class="bi bi-caret-down-fill"></i>
+                    </button>
+                </div>
+                <div class="right-button">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-caution" aria-expanded="false" aria-controls="collapse-caution">
+                        Cautions <i class="bi bi-caret-down-fill"></i>
+                    </button>
+                </div>
+                <div class="collapse" id="collapse-health">
+                    <ul class="list-group">
+                        {% for i in range(0, organised_recipe_data['health_labels']|length) %}
+                            <li class="list-group-item" style="background-color: #ffb061;">{{ organised_recipe_data['health_labels'][i] }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="collapse" id="collapse-diet">
+                    <ul class="list-group">
+                        {% for i in range(0, organised_recipe_data['diet_labels']|length) %}
+                            <li class="list-group-item" style="background-color: #93ff61;">{{ organised_recipe_data['diet_labels'][i] }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="collapse" id="collapse-caution">
+                    <ul class="list-group">
+                        {% for i in range(0, organised_recipe_data['cautions']|length) %}
+                            <li class="list-group-item" style="background-color: #ff7b61;">{{ organised_recipe_data['cautions'][i] }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <br><br><br>
+            <h5>Ingredients List</h5>
+            <ul>
+                {% for i in range(0, ingredients_list|length) %}
+                    <li>{{ ingredients_list[i] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="right-container">
+            <h5>Macronutrient Chart</h5>
+            <div class="row" style="width: 100%;">
+                <div id="macronutrient_chart"></div>
+            </div>
+            <br>
+            <h5>Micronutrient Chart</h5>
+            <div class="row" style="width: 100%;">
+                <div id="micronutrient_chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+        var micronutrient_chart = {{ micronutrient_chart_JSON | safe }};
+        Plotly.plot('micronutrient_chart', micronutrient_chart, {});
+        var macronutrient_chart = {{ macronutrient_chart_JSON | safe }};
+        Plotly.plot('macronutrient_chart', macronutrient_chart, {});
+    </script>
+{% endblock %}

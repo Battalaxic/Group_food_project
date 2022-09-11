@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <div class="query_box clearfix">
+        <form method="post">
+            <label for="recipe_query" class="form-label">Search</label>
+            <input type="text" class="form-control" required id="recipe_query" name="recipe_query" placeholder="Search Recipes">
+            <br>
+            <label for="diet_query" class="form-label">Choose Diet</label>
+            <input type="text" class="form-control" id="diet_query" name="diet_query" placeholder="Choose Diet">
+            <br>
+            <label for="health_query" class="form-label">Choose Health Label</label>
+            <input type="text" class="form-control" id="health_query" name="health_query" placeholder="Choose Health Label">
+            <br>
+            <label for="cuisine_type_query" class="form-label">Choose Cuisine Type</label>
+            <input type="text" class="form-control" id="cuisine_type_query" name="cuisine_type_query" placeholder="Choose Cuisine Type">
+            <br>
+            <label for="meal_type_query" class="form-label">Choose Meal Type</label>
+            <input type="text" class="form-control" id="meal_type_query" name="meal_type_query" placeholder="Choose Meal Type">
+            <br>
+            <label for="dish_type_query" class="form-label">Choose Diet Type</label>
+            <input type="text" class="form-control" id="dish_type_query" name="dish_type_query" placeholder="Choose Dish Type">
+            <br>
+            <button type="submit" style="float: right;" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}

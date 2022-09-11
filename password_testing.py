@@ -3,13 +3,7 @@ import os
 import json
 import base64
 
-
-
-# Add a user
-username = 'Brent' # The users username
-password = 'mypassword' # The users password
-
-users = {} # A simple demo storage
+'''users = {} # A simple demo storage'''
 
 def add_empty_dict_if_empty():
     empty_flag = False
@@ -40,10 +34,6 @@ def add_user(username, password):
     update_user_ids_file(users)
     return users
 
-# Verification attempt 1 (incorrect password)
-# username = 'Brent'
-# password = 'notmypassword'
-
 def login_attempt(username, entered_password):
     with open("static/user_ids.txt") as f:
         for line in f:
@@ -68,8 +58,15 @@ def delete_user(username, password):
         del users[username]
         update_user_ids_file(users)
 
+def change_password(username, password, new_password):
+    if login_attempt(username, password) == True:
+        add_user(username, new_password)
+        return True
+    else:
+        return False
+
 
 if __name__ == '__main__':
     add_empty_dict_if_empty()
     add_user("Test", "blood")
-    print(login_attempt("Test", "blood"))
+    print(login_attempt("Test", "bloo"))
