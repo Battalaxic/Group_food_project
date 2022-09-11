@@ -32,8 +32,8 @@ def total_ingredient_determiner(list_of_recipes):
         if ingred_measure_dict[ingred] == "<unit>" or ingred_measure_dict[ingred] == None:
             text = f"{ingred.title()}: ${ingred_price_dict[ingred]}"
         text_list.append(text)
-    print(total_cost(costs))
-    return text_list
+    final_cost = total_cost(costs)
+    return ((text_list, final_cost))
 
 if __name__ == '__main__':
     print(total_ingredient_determiner(["chicken grilled sandwich"]))

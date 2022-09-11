@@ -3,6 +3,14 @@ import graphing
 import fetch_data
 import price
 import password_testing
+import price_graphs
+import history
+import bmicalculator
+import json
+import os
+import mealslogger
+from mealplan import input_mainfood
+import shopping_list
 
 '''https://pythonbasics.org/flask-login/'''
 
@@ -33,17 +41,21 @@ def login_and_register():  # put application's code here
                 return render_template('launch_page.html', user_already_created=user_already_created)
     return render_template('launch_page.html')
 
+
 @app.route('/', methods=['GET','POST'])
 def recipe_query():
     title = "Recipe Search"
     if request.method =='POST':
-        recipe_query = request.form.get('recipe_query')
+        recipe_query1 = request.form.get('recipe_query')
+        #print(recipe_query1)
+        with open("static/recipe_query.txt", "w") as f:
+            f.write(recipe_query1)
         diet_query = request.form.get('diet_query', '')
         health_query = request.form.get('health_query', '')
         cuisine_type_query = request.form.get('cuisine_type_query', '')
         meal_type_query = request.form.get('meal_type_query', '')
         dish_type_query = request.form.get('dish_type_query', '')
-        recipe_list = fetch_data.call_recipe_search(recipe_query, diet_query, health_query, cuisine_type_query, meal_type_query, dish_type_query)
+        recipe_list = fetch_data.call_recipe_search(recipe_query1, diet_query, health_query, cuisine_type_query, meal_type_query, dish_type_query)
         recipe_items = fetch_data.search_recipe_organise(recipe_list)
         recipe_labels = recipe_items['labels']
         recipe_thumbnails = recipe_items['thumbnails']
@@ -56,6 +68,7 @@ def recipe_query():
                                title=title)
     return render_template("recipe_query.html", title=title)
 
+#print(recipe_query1)
 
 @app.route('/recipe_info', methods=['GET','POST'])
 def recipe_info():
@@ -70,16 +83,27 @@ def recipe_info():
         macronutrient_chart_JSON = graphing.macronutrient_chart(specific_recipe_data)
         organised_recipe_data = fetch_data.specific_recipe_organise(specific_recipe_data)
         ingredients_list = organised_recipe_data['ingredients_list']
-        save_recipe_label = organised_recipe_data['label'].lower().split()      # For Thomas' Module
-        api_request_url = fetch_data.search_specific_recipe_api_url(recipe_id)
-        ingreds, costs, measures, qtys = price.ingredient_price_determiner(api_request_url)
-
+        name = organised_recipe_data['label'].lower().split()  # For Thomas' Module
+        #history.get_history(name)
+        #history.get_query()
+        #print(output)
+        #print(api_request_url, "POPOPOPOPOPOPOP")
+        with open("static/recipe_query.txt") as f:
+            for line in f:
+                recipe_query1 = line
+        print(recipe_query1)
+        ingreds, costs, measures, qtys = price.complete_price_subroutine(recipe_query1)
+        price_pie_chart = price_graphs.price_pie_chart(ingreds, costs)
+        text_list, final_cost = shopping_list.total_ingredient_determiner(recipe_query1)
         return render_template("recipe_info.html",
                                specific_recipe_data=specific_recipe_data,
                                micronutrient_chart_JSON=micronutrient_chart_JSON,
                                macronutrient_chart_JSON=macronutrient_chart_JSON,
                                organised_recipe_data=organised_recipe_data,
                                ingredients_list=ingredients_list,
+                               price_pie_chart_JSON=price_pie_chart,
+                               text_list=text_list,
+                               final_cost=final_cost,
                                title=title)
 
 

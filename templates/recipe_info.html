@@ -52,6 +52,14 @@
                 {% endfor %}
             </ul>
         </div>
+        <div class="left-container">
+            {% for text in text_list %}
+                <tr>
+                    <td>{{ text }}</td>
+                </tr>
+            {% endfor %}
+            {{ final_cost }}
+        </div>
         <div class="right-container">
             <h5>Macronutrient Chart</h5>
             <div class="row" style="width: 100%;">
@@ -62,6 +70,11 @@
             <div class="row" style="width: 100%;">
                 <div id="micronutrient_chart"></div>
             </div>
+            <br>
+            <h5>Ingredient Price Breakdown</h5>
+            <div class="row" style="width: 100%;">
+                <div id="price_pie_chart_JSON"></div>
+            </div>
         </div>
     </div>
 
@@ -71,5 +84,7 @@
         Plotly.plot('micronutrient_chart', micronutrient_chart, {});
         var macronutrient_chart = {{ macronutrient_chart_JSON | safe }};
         Plotly.plot('macronutrient_chart', macronutrient_chart, {});
+        var price_pie_chart = {{ price_pie_chart_JSON | safe }};
+        Plotly.plot('price_pie_chart_JSON', price_pie_chart, {});
     </script>
 {% endblock %}

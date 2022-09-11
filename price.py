@@ -6,8 +6,8 @@ import json
 import os
 from pprint import pprint
 
-EDANAM_APP_ID="0e0f1be9"
-EDANAM_API_KEY="881c76af2388a8ebb52475c2c10d24f5"
+EDANAM_APP_ID="7f49ba3c"
+EDANAM_API_KEY="eb850f425427a802d5040b88905f4e7a"
 
 endpoint = "https://api.edamam.com/api/recipes/v2"
 def find_ingredients(recipe_query, fields=[]):     #Jason's function (modified for my purposes)
@@ -22,6 +22,7 @@ def find_ingredients(recipe_query, fields=[]):     #Jason's function (modified f
 
 def ingredient_list_creator(request_url):
     JSON = requests.get(request_url).json()
+    #print(JSON)
     ingredients_JSON_list = JSON["hits"][0]["recipe"]["ingredients"]  #This is a list
     ingredient_list = []
     for ingredient_JSON in ingredients_JSON_list:
@@ -63,6 +64,7 @@ def dict_updater(ingredient_list):
 
 def ingredient_price_determiner(request_url, date=str(date.today())):
     JSON_response = requests.get(request_url).json()
+    print(JSON_response, "LOLOLOLOL")
     ingredients_JSON_list = JSON_response["hits"][0]["recipe"]["ingredients"]  # This is a list
     ingredient_list = []
     ingred_qty_list = []
