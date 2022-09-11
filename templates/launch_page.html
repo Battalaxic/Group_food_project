@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block content %}
+    <div style="color: white">
     {% if user_already_created == True %}
         <p class="warning">Username already taken </p>
     {% endif %}
     {% if failed_login == True %}
         <p class="warning">Failed login!</p>
     {% endif %}
-    <form style="color: black;" method="post">
+    <form style="color: white;" method="post">
         <h1>Sign up:</h1>
         <div class="form-group">
             <label for="username">Username</label>
@@ -26,4 +27,5 @@
         <input type="submit" name="user_function" value="Login" class="btn btn-primary"></input>
         <input type="submit" name="user_function" value="Register" class="btn btn-primary"></input>
     </form>
+    </div>
 {% endblock %}

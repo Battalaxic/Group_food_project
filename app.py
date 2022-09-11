@@ -13,9 +13,9 @@ logged_in_flag = False
 def login_and_register():  # put application's code here
     user_already_created = False
     if request.method == "POST":
+        password = request.form.get("password")
+        username = request.form.get("username")
         if request.form.get("user_function") == "Login":
-            password = request.form.get("password")
-            username = request.form.get("username")
             if password_testing.login_attempt(username, password) == True:
                 logged_in_flag = True
                 return redirect(url_for("recipe_query"))
@@ -24,6 +24,7 @@ def login_and_register():  # put application's code here
                 return render_template('launch_page.html', failed_login=True)
         elif request.form.get("user_function") == "Register":
             new_user_file = f"static/{request.form.get('username')}.txt"
+            password_testing.add_user(username, password)
             try:
                 create_file = open(new_user_file, "x")
                 return redirect(url_for("recipe_query"))
@@ -70,6 +71,9 @@ def recipe_info():
         organised_recipe_data = fetch_data.specific_recipe_organise(specific_recipe_data)
         ingredients_list = organised_recipe_data['ingredients_list']
         save_recipe_label = organised_recipe_data['label'].lower().split()      # For Thomas' Module
+        api_request_url = fetch_data.search_specific_recipe_api_url(recipe_id)
+        ingreds, costs, measures, qtys = price.ingredient_price_determiner(api_request_url)
+
         return render_template("recipe_info.html",
                                specific_recipe_data=specific_recipe_data,
                                micronutrient_chart_JSON=micronutrient_chart_JSON,

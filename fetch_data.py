@@ -115,6 +115,12 @@ def search_specific_recipe(recipe_id):
     specific_recipe = response.json()
     return specific_recipe
 
+# Eric's Function
+def search_specific_recipe_api_url(recipe_id):
+    required_query_parameters = f'&app_id={EDANAM_APP_ID}&app_key={EDANAM_API_KEY}'
+    request = f'{endpoint}/{recipe_id}{path}{required_query_parameters}'
+    return request
+
 
 def specific_recipe_organise(recipe_data):
     label = recipe_data['recipe']['label']
