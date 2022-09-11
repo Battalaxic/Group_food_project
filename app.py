@@ -94,7 +94,7 @@ def recipe_info():
         print(recipe_query1)
         ingreds, costs, measures, qtys = price.complete_price_subroutine(recipe_query1)
         price_pie_chart = price_graphs.price_pie_chart(ingreds, costs)
-        text_list, final_cost = shopping_list.total_ingredient_determiner(recipe_query1)
+        #text_list, final_cost = shopping_list.total_ingredient_determiner(recipe_query1)
         return render_template("recipe_info.html",
                                specific_recipe_data=specific_recipe_data,
                                micronutrient_chart_JSON=micronutrient_chart_JSON,
@@ -102,8 +102,6 @@ def recipe_info():
                                organised_recipe_data=organised_recipe_data,
                                ingredients_list=ingredients_list,
                                price_pie_chart_JSON=price_pie_chart,
-                               text_list=text_list,
-                               final_cost=final_cost,
                                title=title)
 
 

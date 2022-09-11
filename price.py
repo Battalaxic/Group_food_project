@@ -64,7 +64,7 @@ def dict_updater(ingredient_list):
 
 def ingredient_price_determiner(request_url, date=str(date.today())):
     JSON_response = requests.get(request_url).json()
-    print(JSON_response, "LOLOLOLOL")
+    #print(JSON_response, "LOLOLOLOL")
     ingredients_JSON_list = JSON_response["hits"][0]["recipe"]["ingredients"]  # This is a list
     ingredient_list = []
     ingred_qty_list = []
